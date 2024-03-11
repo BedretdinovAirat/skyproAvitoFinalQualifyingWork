@@ -1,17 +1,21 @@
 import React from "react";
-
+import "./main.css";
+import * as S from "./MainStyled.js";
 const Main = () => {
   return (
-    <div class="wrapper">
-      <div class="container">
-        <header class="header">
-          <nav class="header__nav">
-            <button class="header__btn-main-enter btn-hov01" id="btnMainEnter">
+    <S.Wrapper>
+      <S.Container>
+        <S.Header>
+          <S.NavHeader>
+            <S.Button
+              class="header__btn-main-enter btn-hov01"
+              id="btnMainEnter"
+            >
               Вход в личный кабинет
-            </button>
-          </nav>
-        </header>
-        <main class="main">
+            </S.Button>
+          </S.NavHeader>
+        </S.Header>
+        <S.Main class="main">
           <div class="main__search search">
             <use class="search__logo-link" href="#" target="_blank">
               <img class="search__logo-img" src="./img/logo.png" alt="logo" />
@@ -246,7 +250,7 @@ const Main = () => {
               </div>
             </div>
           </div>
-        </main>
+        </S.Main>
 
         <footer class="footer">
           <div class="footer__container">
@@ -267,8 +271,8 @@ const Main = () => {
             </div>
           </div>
         </footer>
-      </div>
-    </div>
+      </S.Container>
+    </S.Wrapper>
   );
 };
 

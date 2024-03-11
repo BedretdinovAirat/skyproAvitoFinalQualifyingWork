@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from "react";
+import "./profile.css";
 const Profile = () => {
   return (
     <div class="wrapper">
@@ -8,11 +8,7 @@ const Profile = () => {
           <nav class="header__nav">
             <div class="header__logo logo-mob">
               <use class="logo-mob__link" href="" target="_blank">
-                <img
-                  class="logo-mob__img"
-                  src="../img/logo-mob.png"
-                  alt="logo"
-                />
+                <img class="logo-mob__img" src="img/logo-mob.png" alt="logo" />
               </use>
             </div>
             <button class="header__btn-putAd btn-hov01" id="btputAd">
@@ -28,11 +24,7 @@ const Profile = () => {
             <div class="main__center-block">
               <div class="main__menu menu">
                 <use class="menu__logo-link" href="" target="_blank">
-                  <img
-                    class="menu__logo-img"
-                    src="../img/logo.png"
-                    alt="logo"
-                  />
+                  <img class="menu__logo-img" src="img/logo.png" alt="logo" />
                 </use>
                 <form class="menu__form" action="#">
                   <button class="menu__btn btn-hov02" id="btnGoBack">
@@ -53,7 +45,11 @@ const Profile = () => {
                           <img src="#" alt="" />
                         </use>
                       </div>
-                      <use class="settings__change-photo" href="" target="_self">
+                      <use
+                        class="settings__change-photo"
+                        href=""
+                        target="_self"
+                      >
                         Заменить
                       </use>
                     </div>
@@ -251,17 +247,17 @@ const Profile = () => {
           <div class="footer__container">
             <div class="footer__img">
               <use href="" target="_self">
-                <img src="../img/icon_01.png" alt="home" />
+                <img src="img/icon_01.png" alt="home" />
               </use>
             </div>
             <div class="footer__img">
               <use href="" target="_self">
-                <img src="../img/icon_02.png" alt="home" />
+                <img src="img/icon_02.png" alt="home" />
               </use>
             </div>
             <div class="footer__img">
               <use href="" target="_self">
-                <img src="../img/icon_03.png" alt="home" />
+                <img src="img/icon_03.png" alt="home" />
               </use>
             </div>
           </div>
@@ -269,6 +265,6 @@ const Profile = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Profile
+export default Profile;

@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./article.css";
 const Article = () => {
   return (
     <div class="wrapper">
@@ -8,11 +8,7 @@ const Article = () => {
           <nav class="header__nav">
             <div class="header__logo logo-mob">
               <use class="logo-mob__link" href="" target="_blank">
-                <img
-                  class="logo-mob__img"
-                  src="../img/logo-mob.png"
-                  alt="logo"
-                />
+                <img class="logo-mob__img" src="img/logo-mob.png" alt="logo" />
               </use>
             </div>
             <button class="header__btn-putAd btn-hov01" id="btputAd">
@@ -28,7 +24,7 @@ const Article = () => {
           <div class="main__container">
             <div class="main__menu menu">
               <use class="menu__logo-link" href="" target="_blank">
-                <img class="menu__logo-img" src="../img/logo.png" alt="logo" />
+                <img class="menu__logo-img" src="img/logo.png" alt="logo" />
               </use>
               <form class="menu__form" action="#">
                 <button class="menu__btn-serch btn-hov02" id="btnGoBack">
@@ -125,17 +121,17 @@ const Article = () => {
           <div class="footer__container">
             <div class="footer__img">
               <use href="" target="_self">
-                <img src="../img/icon_01.png" alt="home" />
+                <img src="img/icon_01.png" alt="home" />
               </use>
             </div>
             <div class="footer__img">
               <use href="" target="_self">
-                <img src="../img/icon_02.png" alt="home" />
+                <img src="img/icon_02.png" alt="home" />
               </use>
             </div>
             <div class="footer__img">
               <use href="" target="_self">
-                <img src="../img/icon_03.png" alt="home" />
+                <img src="img/icon_03.png" alt="home" />
               </use>
             </div>
           </div>
