@@ -1,14 +1,18 @@
 import React from "react";
 import "./signup.css";
+import { Link } from "react-router-dom";
+import Wrapper from "../../components/wrapper/Wrapper";
 const SignUp = () => {
   return (
-    <div class="wrapper">
+    <Wrapper>
       <div class="container-signup">
         <div class="modal__block">
           <form class="modal__form-login" id="formLogUp" action="#">
-            <div class="modal__logo">
-              <img src="../img/logo_modal.png" alt="logo" />
-            </div>
+            <Link to="/">
+              <div class="modal__logo">
+                <img src="../img/logo_modal.png" alt="logo" />
+              </div>
+            </Link>
             <input
               class="modal__input login"
               type="text"
@@ -54,10 +58,13 @@ const SignUp = () => {
             <button class="modal__btn-signup-ent" id="SignUpEnter">
               <a href="../index.html">Зарегистрироваться</a>
             </button>
+            <button class="modal__btn-enter" id="btnEnter">
+              <Link to="/signin">Войти</Link>
+            </button>
           </form>
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

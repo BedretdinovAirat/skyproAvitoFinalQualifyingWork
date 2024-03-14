@@ -1,5 +1,5 @@
 import React from "react";
-import "./addnewat.css";
+import styles from "./addNewat.module.css";
 const AddNewat = () => {
   return (
     <div class="wrapper">

@@ -7,7 +7,7 @@ function App() {
     //   <Main></Main>
     // </div>
     <AppRoutes></AppRoutes>
-  );
+    );
 }
 
 export default App;

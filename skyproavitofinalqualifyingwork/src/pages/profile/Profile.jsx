@@ -1,54 +1,114 @@
 import React from "react";
-import "./main.css";
-// import * as S from "./MainStyled.js";
-const Main = () => {
+import "./profile.css";
+import { Link } from "react-router-dom";
+import Layout from "../../components/layout/Layout";
+const Profile = () => {
   return (
-    <div class="wrapper">
-      <div class="container">
-        <header class="header">
-          <nav class="header__nav">
-            <button class="header__btn-main-enter btn-hov01" id="btnMainEnter">
-              Вход в личный кабинет
-            </button>
-          </nav>
-        </header>
+    <Layout>
         <main class="main">
-          <div class="main__search search">
-            <use class="search__logo-link" href="#" target="_blank">
-              <img class="search__logo-img" src="./img/logo.png" alt="logo" />
-            </use>
-            <use class="search__logo-mob-link" href="#" target="_blank">
-              <img
-                class="search__logo-mob-img"
-                src="./img/logo-mob.png"
-                alt="logo"
-              />
-            </use>
-            <form class="search__form" action="#">
-              <input
-                class="search__text"
-                type="search"
-                placeholder="Поиск по объявлениям"
-                name="search"
-              />
-              <input
-                class="search__text-mob"
-                type="search"
-                placeholder="Поиск"
-                name="search-mob"
-              />
-              <button class="search__btn btn-hov02">Найти</button>
-            </form>
-          </div>
           <div class="main__container">
-            <h2 class="main__h2">Объявления</h2>
+            <div class="main__center-block">
+              <div class="main__menu menu">
+                <use class="menu__logo-link" href="" target="_blank">
+                  <img class="menu__logo-img" src="img/logo.png" alt="logo" />
+                </use>
+                <form class="menu__form" action="#">
+                  <Link to="/" class="menu__btn btn-hov02">
+                    Вернуться на&nbsp;главную
+                  </Link>
+                </form>
+              </div>
 
+              <h2 class="main__h2">Здравствуйте, Антон!</h2>
+
+              <div class="main__profile profile">
+                <div class="profile__content">
+                  <h3 class="profile__title title">Настройки профиля</h3>
+                  <div class="profile__settings settings">
+                    <div class="settings__left">
+                      <div class="settings__img">
+                        <use href="" target="_self">
+                          <img src="#" alt="" />
+                        </use>
+                      </div>
+                      <use
+                        class="settings__change-photo"
+                        href=""
+                        target="_self"
+                      >
+                        Заменить
+                      </use>
+                    </div>
+                    <div class="settings__right">
+                      <form class="settings__form" action="#">
+                        <div class="settings__div">
+                          <label for="fname">Имя</label>
+                          <input
+                            class="settings__f-name"
+                            id="settings-fname"
+                            name="fname"
+                            type="text"
+                            value="Ан"
+                            placeholder=""
+                          />
+                        </div>
+
+                        <div class="settings__div">
+                          <label for="lname">Фамилия</label>
+                          <input
+                            class="settings__l-name"
+                            id="settings-lname"
+                            name="lname"
+                            type="text"
+                            value="Городецкий"
+                            placeholder=""
+                          />
+                        </div>
+
+                        <div class="settings__div">
+                          <label for="city">Город</label>
+                          <input
+                            class="settings__city"
+                            id="settings-city"
+                            name="city"
+                            type="text"
+                            value="Санкт-Петербург"
+                            placeholder=""
+                          />
+                        </div>
+
+                        <div class="settings__div">
+                          <label for="phone">Телефон</label>
+                          <input
+                            class="settings__phone"
+                            id="settings-phone"
+                            name="phone"
+                            type="tel"
+                            value="89161234567"
+                            placeholder="+79161234567"
+                          />
+                        </div>
+
+                        <button
+                          class="settings__btn btn-hov02"
+                          id="settings-btn"
+                        >
+                          Сохранить
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="main__title title">Мои товары</h3>
+            </div>
             <div class="main__content">
               <div class="content__cards cards">
                 <div class="cards__item">
                   <div class="cards__card card">
                     <div class="card__image">
-                      <use href="#" target="_blank">
+                      <use href="" target="_blank">
                         <img src="#" alt="picture" />
                       </use>
                     </div>
@@ -68,7 +128,7 @@ const Main = () => {
                 <div class="cards__item">
                   <div class="cards__card card">
                     <div class="card__image">
-                      <use href="#" target="_blank">
+                      <use href="" target="_blank">
                         <img src="#" alt="picture" />
                       </use>
                     </div>
@@ -88,7 +148,7 @@ const Main = () => {
                 <div class="cards__item">
                   <div class="cards__card card">
                     <div class="card__image">
-                      <use href="#" target="_blank">
+                      <use href="" target="_blank">
                         <img src="#" alt="picture" />
                       </use>
                     </div>
@@ -108,7 +168,7 @@ const Main = () => {
                 <div class="cards__item">
                   <div class="cards__card card">
                     <div class="card__image">
-                      <use href="#" target="_blank">
+                      <use href="" target="_blank">
                         <img src="#" alt="picture" />
                       </use>
                     </div>
@@ -128,7 +188,7 @@ const Main = () => {
                 <div class="cards__item">
                   <div class="cards__card card">
                     <div class="card__image">
-                      <use href="#" target="_blank">
+                      <use href="" target="_blank">
                         <img src="#" alt="picture" />
                       </use>
                     </div>
@@ -148,87 +208,7 @@ const Main = () => {
                 <div class="cards__item">
                   <div class="cards__card card">
                     <div class="card__image">
-                      <use href="#" target="_blank">
-                        <img src="#" alt="picture" />
-                      </use>
-                    </div>
-                    <div class="card__content">
                       <use href="" target="_blank">
-                        <h3 class="card__title">
-                          Ракетка для большого тенниса Triumph Pro ST
-                        </h3>
-                      </use>
-                      <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                      <p class="card__place">Санкт Петербург</p>
-                      <p class="card__date">Сегодня в&nbsp;10:45</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="cards__item">
-                  <div class="cards__card card">
-                    <div class="card__image">
-                      <use href="#" target="_blank">
-                        <img src="#" alt="picture" />
-                      </use>
-                    </div>
-                    <div class="card__content">
-                      <use href="" target="_blank">
-                        <h3 class="card__title">
-                          Ракетка для большого тенниса Triumph Pro ST
-                        </h3>
-                      </use>
-                      <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                      <p class="card__place">Санкт Петербург</p>
-                      <p class="card__date">Сегодня в&nbsp;10:45</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="cards__item">
-                  <div class="cards__card card">
-                    <div class="card__image">
-                      <use href="#" target="_blank">
-                        <img src="#" alt="picture" />
-                      </use>
-                    </div>
-                    <div class="card__content">
-                      <use href="" target="_blank">
-                        <h3 class="card__title">
-                          Ракетка для большого тенниса Triumph Pro ST
-                        </h3>
-                      </use>
-                      <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                      <p class="card__place">Санкт Петербург</p>
-                      <p class="card__date">Сегодня в&nbsp;10:45</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="cards__item">
-                  <div class="cards__card card">
-                    <div class="card__image">
-                      <use href="#" target="_blank">
-                        <img src="#" alt="picture" />
-                      </use>
-                    </div>
-                    <div class="card__content">
-                      <use href="" target="_blank">
-                        <h3 class="card__title">
-                          Ракетка для большого тенниса Triumph Pro ST
-                        </h3>
-                      </use>
-                      <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                      <p class="card__place">Санкт Петербург</p>
-                      <p class="card__date">Сегодня в&nbsp;10:45</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="cards__item">
-                  <div class="cards__card card">
-                    <div class="card__image">
-                      <use href="#" target="_blank">
                         <img src="#" alt="picture" />
                       </use>
                     </div>
@@ -253,24 +233,24 @@ const Main = () => {
           <div class="footer__container">
             <div class="footer__img">
               <use href="" target="_self">
-                <img src="./img/icon_01.png" alt="home" />
+                <img src="img/icon_01.png" alt="home" />
               </use>
             </div>
             <div class="footer__img">
               <use href="" target="_self">
-                <img src="./img/icon_02.png" alt="home" />
+                <img src="img/icon_02.png" alt="home" />
               </use>
             </div>
             <div class="footer__img">
               <use href="" target="_self">
-                <img src="./img/icon_03.png" alt="home" />
+                <img src="img/icon_03.png" alt="home" />
               </use>
             </div>
           </div>
         </footer>
-      </div>
-    </div>
+      
+    </Layout>
   );
 };
 
-export default Main;
+export default Profile;
