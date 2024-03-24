@@ -1,4 +1,4 @@
-.btn-hov01:hover {
+/* .btn-hov01:hover {
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid #FFFFFF;
 }
@@ -62,13 +62,13 @@
 
 .header__logo {
   display: none;
-}
+} */
 
 .main {
   margin: 0 auto;
 }
 
-.main__container {
+.mainContainer {
   max-width: 1178px;
   margin: 0 auto;
   padding: 0px 5px;
@@ -107,7 +107,7 @@
   color: #000000;
 }
 
-.main__content {
+.mainContent {
   max-width: 792px;
   width: 100%;
   padding: 0 5px 117px;

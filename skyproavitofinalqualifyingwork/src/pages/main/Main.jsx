@@ -1,261 +1,91 @@
 import React from "react";
-import "./main.css";
-import { Outlet } from "react-router-dom";
-import Layout from "../../components/layout/Layout";
-// import * as S from "./MainStyled.js";
+import styles from "./main.module.css";
+import { Link, Outlet } from "react-router-dom";
+import { useGetAllAdsQuery } from "../../store/api/advApi";
 const Main = () => {
+  const { data } = useGetAllAdsQuery();
   return (
-    <Layout>
-      <main class="main">
-        <div class="main__search search">
-          <use class="search__logo-link" href="#" target="_blank">
-            <img class="search__logo-img" src="./img/logo.png" alt="logo" />
+    <>
+      <main className={styles.main}>
+        <div className="main__search search">
+          <use className="search__logo-link" href="#" target="_blank">
+            <img className="search__logo-img" src="./img/logo.png" alt="logo" />
           </use>
-          <use class="search__logo-mob-link" href="#" target="_blank">
+          <use className="search__logo-mob-link" href="#" target="_blank">
             <img
-              class="search__logo-mob-img"
+              className="search__logo-mob-img"
               src="./img/logo-mob.png"
               alt="logo"
             />
           </use>
-          <form class="search__form" action="#">
+          <form className="search__form" action="#">
             <input
-              class="search__text"
+              className="search__text"
               type="search"
               placeholder="Поиск по объявлениям"
               name="search"
             />
             <input
-              class="search__text-mob"
+              className="search__text-mob"
               type="search"
               placeholder="Поиск"
               name="search-mob"
             />
-            <button class="search__btn btn-hov02">Найти</button>
+            <button className="search__btn btn-hov02">Найти</button>
           </form>
         </div>
-        <div class="main__container">
-          <h2 class="main__h2">Объявления</h2>
+        <div className={styles.mainContainer}>
+          <h2 className="main__h2">Объявления</h2>
 
-          <div class="main__content">
-            <div class="content__cards cards">
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
-                    <use href="#" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
+          {/* price title user.city. created_on */}
+          <div className={styles.mainContent}>
+            <div className="content__cards cards">
+              {data?.map((adv) => (
+                <Link to={`/article/${adv.id}`}>
+                  <div className="cards__item">
+                    <div className="cards__card card">
+                      <div className="card__image">
+                        <use href="#" target="_blank">
+                          <img
+                            src={
+                              adv?.images?.[0]
+                                ? `http://localhost:8090/${adv.images[0].url}`
+                                : "/img/notImage.png"
+                            }
+                            alt=""
+                          />
+                        </use>
+                      </div>
+                      <div className="card__content">
+                        <use href="" target="_blank">
+                          <h3 className="card__title">{adv.title}</h3>
+                        </use>
+                        <p className="card__price">{adv.price}</p>
+                        <p className="card__place">{adv.user.city}</p>
+                        <p className="card__date">{adv.created_on}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="card__content">
-                    <use href="" target="_blank">
-                      <h3 class="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
-                    <use href="#" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div class="card__content">
-                    <use href="" target="_blank">
-                      <h3 class="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
-                    <use href="#" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div class="card__content">
-                    <use href="" target="_blank">
-                      <h3 class="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
-                    <use href="#" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div class="card__content">
-                    <use href="" target="_blank">
-                      <h3 class="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
-                    <use href="#" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div class="card__content">
-                    <use href="" target="_blank">
-                      <h3 class="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
-                    <use href="#" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div class="card__content">
-                    <use href="" target="_blank">
-                      <h3 class="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
-                    <use href="#" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div class="card__content">
-                    <use href="" target="_blank">
-                      <h3 class="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
-                    <use href="#" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div class="card__content">
-                    <use href="" target="_blank">
-                      <h3 class="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
-                    <use href="#" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div class="card__content">
-                    <use href="" target="_blank">
-                      <h3 class="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
-                    <use href="#" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div class="card__content">
-                    <use href="" target="_blank">
-                      <h3 class="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
       </main>
 
-      <footer class="footer">
-        <div class="footer__container">
-          <div class="footer__img">
+      <footer className="footer">
+        <div className="footer__container">
+          <div className="footer__img">
             <use href="" target="_self">
               <img src="./img/icon_01.png" alt="home" />
             </use>
           </div>
-          <div class="footer__img">
+          <div className="footer__img">
             <use href="" target="_self">
               <img src="./img/icon_02.png" alt="home" />
             </use>
           </div>
-          <div class="footer__img">
+          <div className="footer__img">
             <use href="" target="_self">
               <img src="./img/icon_03.png" alt="home" />
             </use>
@@ -264,7 +94,7 @@ const Main = () => {
       </footer>
 
       <Outlet />
-    </Layout>
+    </>
   );
 };
 

@@ -1,49 +1,48 @@
 import React from "react";
 import "./sellerProfile.css";
-import Layout from "../../components/layout/Layout";
 const SellerProfile = () => {
   return (
-    <Layout>
-      <main class="main">
-        <div class="main__container">
-          <div class="main__center-block">
-            <div class="main__menu menu">
-              <use class="menu__logo-link" href="" target="_blank">
-                <img class="menu__logo-img" src="img/logo.png" alt="logo" />
+    <>
+      <main className="main">
+        <div className="main__container">
+          <div className="main__center-block">
+            <div className="main__menu menu">
+              <use className="menu__logo-link" href="" target="_blank">
+                <img className="menu__logo-img" src="img/logo.png" alt="logo" />
               </use>
-              <form class="menu__form" action="#">
-                <button class="menu__btn btn-hov02" id="btnGoBack">
+              <form className="menu__form" action="#">
+                <button className="menu__btn btn-hov02" id="btnGoBack">
                   Вернуться на&nbsp;главную
                 </button>
               </form>
             </div>
 
-            <h2 class="main__h2">Профиль продавца</h2>
+            <h2 className="main__h2">Профиль продавца</h2>
 
-            <div class="main__profile-sell profile-sell">
-              <div class="profile-sell__content">
-                <div class="profile-sell__seller seller">
-                  <div class="seller__left">
-                    <div class="seller__img">
+            <div className="main__profile-sell profile-sell">
+              <div className="profile-sell__content">
+                <div className="profile-sell__seller seller">
+                  <div className="seller__left">
+                    <div className="seller__img">
                       <use href="" target="_self">
                         <img src="#" alt="" />
                       </use>
                     </div>
                   </div>
-                  <div class="seller__right">
-                    <h3 class="seller__title">Кирилл Матвеев</h3>
-                    <p class="seller__city">Санкт-Петербург</p>
-                    <p class="seller__inf">Продает товары с августа 2021</p>
+                  <div className="seller__right">
+                    <h3 className="seller__title">Кирилл Матвеев</h3>
+                    <p className="seller__city">Санкт-Петербург</p>
+                    <p className="seller__inf">Продает товары с августа 2021</p>
 
-                    <div class="seller__img-mob-block">
-                      <div class="seller__img-mob">
+                    <div className="seller__img-mob-block">
+                      <div className="seller__img-mob">
                         <use href="" target="_self">
                           <img src="#" alt="" />
                         </use>
                       </div>
                     </div>
 
-                    <button class="seller__btn btn-hov02">
+                    <button className="seller__btn btn-hov02">
                       Показать&nbsp;телефон
                       <span>8&nbsp;905&nbsp;ХХХ&nbsp;ХХ&nbsp;ХХ</span>
                     </button>
@@ -52,126 +51,126 @@ const SellerProfile = () => {
               </div>
             </div>
 
-            <h3 class="main__title">Товары продавца</h3>
+            <h3 className="main__title">Товары продавца</h3>
           </div>
-          <div class="main__content">
-            <div class="content__cards cards">
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
+          <div className="main__content">
+            <div className="content__cards cards">
+              <div className="cards__item">
+                <div className="cards__card card">
+                  <div className="card__image">
                     <use href="" target="_blank">
                       <img src="#" alt="picture" />
                     </use>
                   </div>
-                  <div class="card__content">
+                  <div className="card__content">
                     <use href="" target="_blank">
-                      <h3 class="card__title">
+                      <h3 className="card__title">
                         Ракетка для большого тенниса Triumph Pro ST
                       </h3>
                     </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
+                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
+                    <p className="card__place">Санкт Петербург</p>
+                    <p className="card__date">Сегодня в&nbsp;10:45</p>
                   </div>
                 </div>
               </div>
 
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
+              <div className="cards__item">
+                <div className="cards__card card">
+                  <div className="card__image">
                     <use href="" target="_blank">
                       <img src="#" alt="picture" />
                     </use>
                   </div>
-                  <div class="card__content">
+                  <div className="card__content">
                     <use href="" target="_blank">
-                      <h3 class="card__title">
+                      <h3 className="card__title">
                         Ракетка для большого тенниса Triumph Pro ST
                       </h3>
                     </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
+                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
+                    <p className="card__place">Санкт Петербург</p>
+                    <p className="card__date">Сегодня в&nbsp;10:45</p>
                   </div>
                 </div>
               </div>
 
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
+              <div className="cards__item">
+                <div className="cards__card card">
+                  <div className="card__image">
                     <use href="" target="_blank">
                       <img src="#" alt="picture" />
                     </use>
                   </div>
-                  <div class="card__content">
+                  <div className="card__content">
                     <use href="" target="_blank">
-                      <h3 class="card__title">
+                      <h3 className="card__title">
                         Ракетка для большого тенниса Triumph Pro ST
                       </h3>
                     </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
+                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
+                    <p className="card__place">Санкт Петербург</p>
+                    <p className="card__date">Сегодня в&nbsp;10:45</p>
                   </div>
                 </div>
               </div>
 
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
+              <div className="cards__item">
+                <div className="cards__card card">
+                  <div className="card__image">
                     <use href="" target="_blank">
                       <img src="#" alt="picture" />
                     </use>
                   </div>
-                  <div class="card__content">
+                  <div className="card__content">
                     <use href="" target="_blank">
-                      <h3 class="card__title">
+                      <h3 className="card__title">
                         Ракетка для большого тенниса Triumph Pro ST
                       </h3>
                     </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
+                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
+                    <p className="card__place">Санкт Петербург</p>
+                    <p className="card__date">Сегодня в&nbsp;10:45</p>
                   </div>
                 </div>
               </div>
 
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
+              <div className="cards__item">
+                <div className="cards__card card">
+                  <div className="card__image">
                     <use href="" target="_blank">
                       <img src="#" alt="picture" />
                     </use>
                   </div>
-                  <div class="card__content">
+                  <div className="card__content">
                     <use href="" target="_blank">
-                      <h3 class="card__title">
+                      <h3 className="card__title">
                         Ракетка для большого тенниса Triumph Pro ST
                       </h3>
                     </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
+                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
+                    <p className="card__place">Санкт Петербург</p>
+                    <p className="card__date">Сегодня в&nbsp;10:45</p>
                   </div>
                 </div>
               </div>
 
-              <div class="cards__item">
-                <div class="cards__card card">
-                  <div class="card__image">
+              <div className="cards__item">
+                <div className="cards__card card">
+                  <div className="card__image">
                     <use href="" target="_blank">
                       <img src="#" alt="picture" />
                     </use>
                   </div>
-                  <div class="card__content">
+                  <div className="card__content">
                     <use href="" target="_blank">
-                      <h3 class="card__title">
+                      <h3 className="card__title">
                         Ракетка для большого тенниса Triumph Pro ST
                       </h3>
                     </use>
-                    <p class="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p class="card__place">Санкт Петербург</p>
-                    <p class="card__date">Сегодня в&nbsp;10:45</p>
+                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
+                    <p className="card__place">Санкт Петербург</p>
+                    <p className="card__date">Сегодня в&nbsp;10:45</p>
                   </div>
                 </div>
               </div>
@@ -180,26 +179,26 @@ const SellerProfile = () => {
         </div>
       </main>
 
-      <footer class="footer">
-        <div class="footer__container">
-          <div class="footer__img">
+      <footer className="footer">
+        <div className="footer__container">
+          <div className="footer__img">
             <use href="" target="_self">
               <img src="img/icon_01.png" alt="home" />
             </use>
           </div>
-          <div class="footer__img">
+          <div className="footer__img">
             <use href="" target="_self">
               <img src="img/icon_02.png" alt="home" />
             </use>
           </div>
-          <div class="footer__img">
+          <div className="footer__img">
             <use href="" target="_self">
               <img src="img/icon_03.png" alt="home" />
             </use>
           </div>
         </div>
       </footer>
-    </Layout>
+    </>
   );
 };
 

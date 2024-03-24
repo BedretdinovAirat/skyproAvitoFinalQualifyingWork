@@ -1,60 +1,67 @@
-
-.container-bg {
+.modalContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.containerBg {
   max-width: 100%;
   height: 100vh;
   margin: 0 auto;
   position: relative;
-  background-color: #F4F5F6;
+  background-color: rgba(0, 0, 0, 0.193);
 }
 
-.modal__btn-close-line:hover::after, .modal__btn-close-line:hover::before {
-  background-color: #0080C1;
+.modal__btn-close-line:hover::after,
+.modal__btn-close-line:hover::before {
+  background-color: #0080c1;
 }
 
 .modal__title:hover::before {
-  border-top: 2px solid #0080C1;
-  border-left: 2px solid #0080C1;
+  border-top: 2px solid #0080c1;
+  border-left: 2px solid #0080c1;
 }
 
 .btn-hov02:hover {
-  background-color: #0080C1;
+  background-color: #0080c1;
 }
 
-.modal__block {
+.modalBlock {
   position: absolute;
   z-index: 5;
-  left: calc(50% - (600px/2));
+  left: calc(50% - (600px / 2));
   top: 60px;
   opacity: 1;
 }
 
-.modal__content {
+.modalContent {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   width: 600px;
   height: auto;
   padding: 32px 50px 42px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 12px;
   position: relative;
 }
 
-.modal__title {
+.modalTitle {
   font-size: 32px;
   line-height: 46px;
   font-weight: 500;
   color: #000000;
 }
 
-.modal__btn-close {
+.modalBtnClose {
   width: 23px;
   height: 23px;
   position: absolute;
@@ -64,54 +71,55 @@
   cursor: pointer;
 }
 
-.modal__btn-close-line {
+.modalBtnCloseLine {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.modal__btn-close-line::after, .modal__btn-close-line::before {
+.modal__btn-close-line::after,
+.modal__btn-close-line::before {
   content: "";
   position: absolute;
   width: 30px;
   height: 2px;
   border-radius: 2px;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   top: 47%;
   right: -4px;
 }
 
 .modal__btn-close-line::before {
   -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .modal__btn-close-line::after {
   -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
-.modal__form-newArt {
+.modalFormNewArt {
   margin-top: 22px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   width: 100%;
 }
 
-.form-newArt__block {
+.formNewArtBlock {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   margin-bottom: 20px;
 }
 
@@ -122,155 +130,158 @@
   color: #000000;
 }
 
-.form-newArt__input, .form-newArt__area, .form-newArt__input-price {
+.formNewArtInput,
+.formNewArtArea,
+.formNewArtInputPrice {
   padding: 13px 19px;
-  background: #FFFFFF;
+  background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   font-size: 16px;
   line-height: 1;
 }
 
-.form-newArt__input {
+.formNewArtInput {
   width: 100%;
   font-size: 16px;
   line-height: 24px;
 }
 
-.form-newArt__input::-webkit-input-placeholder {
+.formNewArtInput::-webkit-input-placeholder {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #0000004D;
+  color: #0000004d;
 }
 
-.form-newArt__input:-ms-input-placeholder {
+.formNewArtInput:-ms-input-placeholder {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #0000004D;
+  color: #0000004d;
 }
 
-.form-newArt__input::-ms-input-placeholder {
+.formNewArtInput::-ms-input-placeholder {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #0000004D;
+  color: #0000004d;
 }
 
-.form-newArt__input::placeholder {
+.formNewArtInput::placeholder {
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #0000004D;
+  color: #0000004d;
 }
 
-.form-newArt__area {
-  font-family: 'Roboto', sans-serif;
+.formNewArtArea {
+  font-family: "Roboto", sans-serif;
   width: 100%;
   max-height: 200px;
   font-size: 16px;
   line-height: 24px;
 }
 
-.form-newArt__area::-webkit-input-placeholder {
-  font-family: 'Roboto', sans-serif;
+.formNewArtArea::-webkit-input-placeholder {
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #0000004D;
+  color: #0000004d;
 }
 
-.form-newArt__area:-ms-input-placeholder {
-  font-family: 'Roboto', sans-serif;
+.formNewArtArea:-ms-input-placeholder {
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #0000004D;
+  color: #0000004d;
 }
 
-.form-newArt__area::-ms-input-placeholder {
-  font-family: 'Roboto', sans-serif;
+.formNewArtArea::-ms-input-placeholder {
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #0000004D;
+  color: #0000004d;
 }
 
-.form-newArt__area::placeholder {
-  font-family: 'Roboto', sans-serif;
+.formNewArtArea::placeholder {
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #0000004D;
+  color: #0000004d;
 }
 
-.form-newArt__p {
+.formNewArtP {
   font-size: 16px;
   line-height: 24px;
   color: #000000;
   margin-bottom: 10px;
 }
 
-.form-newArt__p span {
+.formNewArtP span {
   margin-left: 10px;
   color: rgba(0, 0, 0, 0.3);
 }
 
-.form-newArt__bar-img {
+.formNewArtBarImg {
   width: 500px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   margin-bottom: 10px;
   overflow: hidden;
 }
 
-.form-newArt__img-cover {
+.formNewArtImgCover {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   z-index: -1;
 }
 
-.form-newArt__img-cover::after, .form-newArt__img-cover::before {
+.fformNewArtImgCover::after,
+.formNewArtImgCover::before {
   content: "";
   position: absolute;
   width: 30px;
   height: 2px;
   border-radius: 2px;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   top: 50%;
-  right: calc(50% - (30px/2));
+  right: calc(50% - (30px / 2));
 }
 
-.form-newArt__img-cover::before {
+.formNewArtImgCover::before {
   -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
-.form-newArt__img {
+.formNewArtImg {
   width: 90px;
   height: 90px;
   margin-right: 10px;
@@ -278,16 +289,16 @@
   z-index: 0;
 }
 
-.form-newArt__img img {
+.formNewArtImg img {
   display: block;
   width: 100%;
   height: auto;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   z-index: 2;
 }
 
-.form-newArt__input-price-cover {
+.formNewArtInputPriceCover {
   width: 24px;
   height: 24px;
   font-size: 16px;
@@ -297,10 +308,10 @@
   bottom: 13px;
   left: 170px;
   z-index: 0;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
-.form-newArt__input-price-cover::after {
+.formNewArtInputPriceCover::after {
   content: "\A0 \20BD";
   width: 24px;
   height: 24px;
@@ -311,14 +322,14 @@
   z-index: 2;
 }
 
-.form-newArt__input-price {
+.formNewArtInputPrice {
   width: 200px;
   font-size: 16px;
   line-height: 24px;
   color: #000000;
 }
 
-.form-newArt__input-price::-webkit-input-placeholder {
+.formNewArtInputPrice::-webkit-input-placeholder {
   text-align: end;
   font-style: normal;
   font-weight: 400;
@@ -327,7 +338,7 @@
   color: #000000;
 }
 
-.form-newArt__input-price:-ms-input-placeholder {
+.formNewArtInputPrice:-ms-input-placeholder {
   text-align: end;
   font-style: normal;
   font-weight: 400;
@@ -336,7 +347,7 @@
   color: #000000;
 }
 
-.form-newArt__input-price::-ms-input-placeholder {
+.formNewArtInputPrice::-ms-input-placeholder {
   text-align: end;
   font-style: normal;
   font-weight: 400;
@@ -345,7 +356,7 @@
   color: #000000;
 }
 
-.form-newArt__input-price::placeholder {
+.formNewArtInputPrice::placeholder {
   text-align: end;
   font-style: normal;
   font-weight: 400;
@@ -354,16 +365,16 @@
   color: #000000;
 }
 
-.form-newArt__btn-pub {
+.formNewArtBtnPub {
   margin-top: 10px;
   width: 181px;
   height: 50px;
-  background: #D9D9D9;
-  border: 1px solid #D9D9D9;
+  background: #d9d9d9;
+  border: 1px solid #d9d9d9;
   border-radius: 6px;
   font-size: 16px;
   line-height: 24px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .block-price {
