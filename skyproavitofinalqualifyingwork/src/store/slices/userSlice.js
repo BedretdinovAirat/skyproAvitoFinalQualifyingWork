@@ -15,7 +15,8 @@ const userSlice = createSlice({
     },
     removeAuth: (state) => {
       state.isAuth = false;
-      state.token = { access_token: null, refresh_token: null };
+      state.token = null;
+      state.user = null;
     },
     setUserData: (state, action) => {
       state.user = action.payload;

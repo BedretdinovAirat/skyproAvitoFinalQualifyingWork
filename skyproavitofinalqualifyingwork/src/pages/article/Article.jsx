@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./article.css";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { useGetAdQuery } from "../../store/api/advApi";
 import { Link } from "react-router-dom";
 const Article = () => {
+  const [preview, setPreview] = useState(null);
   const { id } = useParams();
   const { data, error } = useGetAdQuery({ id });
+  useEffect(() => {
+    if (data) {
+      setPreview(`http://localhost:8090/${data.images[0].url}`);
+    }
+  }, [data]);
   return (
     <>
       <main className="main">
@@ -27,22 +33,17 @@ const Article = () => {
             <div className="article__left">
               <div className="article__fill-img">
                 <div className="article__img">
-                  <img
-                    src={
-                      data?.images[0]
-                        ? `http://localhost:8090/${data.images[0].url}`
-                        : "/img/notImage.png"
-                    }
-                    alt=""
-                  />
+                  <img src={preview ?? "/img/notImage.png"} alt="" />
                 </div>
                 <div className="article__img-bar">
                   {data?.images.map((img) => (
-                    <div className="article__img-bar-div">
-                      <img
-                        src={`http://localhost:8090/${img.url}`}
-                        alt=""
-                      />
+                    <div
+                      onClick={() =>
+                        setPreview(`http://localhost:8090/${img.url}`)
+                      }
+                      className="article__img-bar-div"
+                    >
+                      <img src={`http://localhost:8090/${img.url}`} alt="" />
                     </div>
                   ))}
                 </div>
@@ -70,20 +71,22 @@ const Article = () => {
                   Показать&nbsp;телефон
                   <span>{data?.user.phone}</span>
                 </button>
-                <div className="article__author author">
-                  <div className="author__img">
-                    <img
-                      src={data?.user.avatar ?? "/img/notImage.png"}
-                      alt=""
-                    />
+                <Link to={`/seller-profile/${data?.user_id}`}>
+                  <div className="article__author author">
+                    <div className="author__img">
+                      <img
+                        src={data?.user.avatar ?? "/img/notImage.png"}
+                        alt=""
+                      />
+                    </div>
+                    <div className="author__cont">
+                      <p className="author__name">{data?.user.name}</p>
+                      <p className="author__about">
+                        Продает товары с {data?.user.sells_from}
+                      </p>
+                    </div>
                   </div>
-                  <div className="author__cont">
-                    <p className="author__name">{data?.user.name}</p>
-                    <p className="author__about">
-                      Продает товары с {data?.user.sells_from}
-                    </p>
-                  </div>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

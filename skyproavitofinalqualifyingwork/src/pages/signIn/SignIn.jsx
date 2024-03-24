@@ -1,34 +1,32 @@
 import React, { useState } from "react";
 import "./signin.css";
-import { Link } from "react-router-dom";
-import { useSignUpMutation } from "../../store/api/userApi";
+import { Link, useNavigate } from "react-router-dom";
+import { useSignInMutation } from "../../store/api/userApi";
+import { useAuth } from "../../context/useAuth";
 const SignIn = () => {
-  const [signIn] = useSignUpMutation();
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [signIn] = useSignInMutation();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
-    repitPassword: "",
-    name: "",
-    surname: "",
-    city: "",
-    phone: "",
   });
   const onChange = (event) => {
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value });
   };
   const onClick = () => {
-    const { email, password, repitPassword, name, surname, city, phone } =
-      userData;
+    const { email, password } = userData;
     if (!email || !password) {
       alert("error");
       return;
     }
-    if (!email && !password) {
-      alert("error");
-      return;
-    }
-    signIn({ email, password });
+    signIn({ email, password })
+      .unwrap()
+      .then((data) => {
+        navigate("/");
+        login({ token: data });
+      });
   };
   return (
     <div className="container-enter">
@@ -44,7 +42,7 @@ const SignIn = () => {
             value={userData.login}
             className="modal__input login"
             type="text"
-            name="login"
+            name="email"
             id="formlogin"
             placeholder="email"
           />
@@ -57,8 +55,13 @@ const SignIn = () => {
             id="formpassword"
             placeholder="Пароль"
           />
-          <button className="modal__btn-enter" id="btnEnter">
-            <Link to="/">Войти</Link>
+          <button
+            type="button"
+            onClick={onClick}
+            className="modal__btn-enter"
+            id="btnEnter"
+          >
+            Войти
           </button>
           <button className="modal__btn-signup" id="btnSignUp">
             <Link to="/signup">Зарегистрироваться</Link>

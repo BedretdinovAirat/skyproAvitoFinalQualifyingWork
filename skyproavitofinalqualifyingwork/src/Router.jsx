@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Main from "./pages/main/Main";
 import Article from "./pages/article/Article";
@@ -28,7 +28,10 @@ const AppRoutes = () => {
               <Route path="reviews" />
             </Route>
             <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/seller-profile" element={<SellerProfile />}></Route>
+            <Route
+              path="/seller-profile/:id"
+              element={<SellerProfile />}
+            ></Route>
           </Route>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />

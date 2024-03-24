@@ -4,6 +4,14 @@ export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
     baseUrl: baseAds,
+    prepareHeaders: (headers, api) => {
+      const { user } = api.getState();
+      if (user.isAuth) {
+        const accessToken = user.token.access_token;
+        headers.append("Authorization", `Bearer ${accessToken}`);
+      }
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     getUserData: builder.query({
@@ -44,5 +52,5 @@ export const userApi = createApi({
     }),
   }),
 });
-export const { useGetUserDataQuery, useSignInMutation, useSignUpMutation } =
+export const { useLazyGetUserDataQuery, useSignInMutation, useSignUpMutation } =
   userApi;

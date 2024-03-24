@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sellerProfile.css";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import {
+  useGetAdSellerQuery,
+  useGetSellersQuery,
+} from "../../store/api/advApi";
+
 const SellerProfile = () => {
+  const { id } = useParams();
+  const [isPhoneVisible, setIsPhoneVisible] = useState(false);
+  // const { data, error } = useGetSellersQuery();
+  const { data: sellerAd } = useGetAdSellerQuery({ user_id: id });
+  // const user = data?.find((seller) => seller.id === id);
   return (
     <>
       <main className="main">
@@ -11,9 +23,9 @@ const SellerProfile = () => {
                 <img className="menu__logo-img" src="img/logo.png" alt="logo" />
               </use>
               <form className="menu__form" action="#">
-                <button className="menu__btn btn-hov02" id="btnGoBack">
+                <Link to="/" className="menu__btn btn-hov02" id="btnGoBack">
                   Вернуться на&nbsp;главную
-                </button>
+                </Link>
               </form>
             </div>
 
@@ -24,15 +36,22 @@ const SellerProfile = () => {
                 <div className="profile-sell__seller seller">
                   <div className="seller__left">
                     <div className="seller__img">
-                      <use href="" target="_self">
-                        <img src="#" alt="" />
-                      </use>
+                      <img
+                        src={
+                          sellerAd?.[0].user.avatar
+                            ? `http://localhost:8090/${sellerAd?.[0].user.avatar}`
+                            : "/img/notImage.png"
+                        }
+                        alt=""
+                      />
                     </div>
                   </div>
                   <div className="seller__right">
-                    <h3 className="seller__title">Кирилл Матвеев</h3>
-                    <p className="seller__city">Санкт-Петербург</p>
-                    <p className="seller__inf">Продает товары с августа 2021</p>
+                    <h3 className="seller__title">{sellerAd?.[0].user.name}</h3>
+                    <p className="seller__city">{sellerAd?.[0].user.city}</p>
+                    <p className="seller__inf">
+                      {sellerAd?.[0].user.sells_from}
+                    </p>
 
                     <div className="seller__img-mob-block">
                       <div className="seller__img-mob">
@@ -42,10 +61,18 @@ const SellerProfile = () => {
                       </div>
                     </div>
 
-                    <button className="seller__btn btn-hov02">
+                    <button
+                      onClick={() => setIsPhoneVisible(!isPhoneVisible)}
+                      className="seller__btn btn-hov02"
+                    >
                       Показать&nbsp;телефон
-                      <span>8&nbsp;905&nbsp;ХХХ&nbsp;ХХ&nbsp;ХХ</span>
+                      <span>
+                        {isPhoneVisible
+                          ? sellerAd?.[0].user.phone
+                          : `${sellerAd?.[0].user.phone.slice(0, 3)} XXX XX XX`}
+                      </span>
                     </button>
+                    {/* то же самое сделать с другими  */}
                   </div>
                 </div>
               </div>
@@ -55,125 +82,32 @@ const SellerProfile = () => {
           </div>
           <div className="main__content">
             <div className="content__cards cards">
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
+              {sellerAd?.map((ad) => (
+                <div className="cards__item">
+                  <div className="cards__card card">
+                    <div className="card__image">
+                      <use href="" target="_blank">
+                        <img
+                          src={
+                            ad?.images?.[0]
+                              ? `http://localhost:8090/${ad.images[0].url}`
+                              : "/img/notImage.png"
+                          }
+                          alt=""
+                        />
+                      </use>
+                    </div>
+                    <div className="card__content">
+                      <use href="" target="_blank">
+                        <h3 className="card__title">{ad.title}</h3>
+                      </use>
+                      <p className="card__price">{ad?.price}</p>
+                      <p className="card__place">{ad?.user.city}</p>
+                      <p className="card__date">{ad?.created_on}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
