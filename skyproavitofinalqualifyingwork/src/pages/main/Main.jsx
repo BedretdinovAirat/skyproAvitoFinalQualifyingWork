@@ -2,41 +2,16 @@ import React from "react";
 import styles from "./main.module.css";
 import { Link, Outlet } from "react-router-dom";
 import { useGetAllAdsQuery } from "../../store/api/advApi";
+import MainSearch from "../../components/mainSearch/MainSearch";
 const Main = () => {
   const { data } = useGetAllAdsQuery();
   return (
     <>
       <main className={styles.main}>
-        <div className="main__search search">
-          <use className="search__logo-link" href="#" target="_blank">
-            <img className="search__logo-img" src="./img/logo.png" alt="logo" />
-          </use>
-          <use className="search__logo-mob-link" href="#" target="_blank">
-            <img
-              className="search__logo-mob-img"
-              src="./img/logo-mob.png"
-              alt="logo"
-            />
-          </use>
-          <form className="search__form" action="#">
-            <input
-              className="search__text"
-              type="search"
-              placeholder="Поиск по объявлениям"
-              name="search"
-            />
-            <input
-              className="search__text-mob"
-              type="search"
-              placeholder="Поиск"
-              name="search-mob"
-            />
-            <button className="search__btn btn-hov02">Найти</button>
-          </form>
-        </div>
+        {/* здесь должен быть компонент */}
+        <MainSearch />
         <div className={styles.mainContainer}>
           <h2 className="main__h2">Объявления</h2>
-
           {/* price title user.city. created_on */}
           <div className={styles.mainContent}>
             <div className="content__cards cards">
