@@ -6,11 +6,12 @@ import { useAuth } from "../../context/useAuth";
 const SignIn = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [signIn] = useSignInMutation();
+  const [signIn, error] = useSignInMutation();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
+
   const onChange = (event) => {
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value });
@@ -26,6 +27,9 @@ const SignIn = () => {
       .then((data) => {
         navigate("/");
         login({ token: data });
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
   return (
@@ -63,6 +67,7 @@ const SignIn = () => {
           >
             Войти
           </button>
+          <p>{error?.error}</p>
           <button className="modal__btn-signup" id="btnSignUp">
             <Link to="/signup">Зарегистрироваться</Link>
           </button>

@@ -1,7 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./profile.css";
 import { Link } from "react-router-dom";
+import { useGetMyAdQuery } from "../../store/api/advApi";
+import { useSelector } from "react-redux";
+import {
+  useChangeAvatarMutation,
+  useUpdateUserInfoMutation,
+} from "../../store/api/userApi";
+
 const Profile = () => {
+  const [updateUser] = useUpdateUserInfoMutation();
+  const [changeAvatar] = useChangeAvatarMutation();
+  const [avatar, setAvatar] = useState("");
+  const [userData, setUserData] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+    city: "",
+    avatar: "",
+  });
+  const { data } = useGetMyAdQuery();
+  const { user } = useSelector((store) => store.user);
+  const onChange = (event) => {
+    const { name, value } = event.target;
+    setUserData({ ...userData, [name]: value });
+  };
+  const onClick = () => {
+    const { name, surname, email, city, phone } = userData;
+    updateUser({ name, surname, email, city, phone })
+      .unwrap()
+      .then(() => alert("Данные обновились"));
+  };
+  const handleAvatar = () => {
+    const file = new FormData();
+    file.append("file", avatar);
+    changeAvatar({ file })
+      .unwrap()
+      .then(() => alert("АВАТАРКА ПОМЕНЯЛАСЬ"));
+  };
+  useEffect(() => {
+    if (user) {
+      setUserData({
+        ...userData,
+        name: user.name,
+        surname: user.surname,
+        email: user.email,
+        city: user.city,
+        phone: user.phone,
+        avatar: `http://localhost:8090/${user.avatar}`,
+      });
+    }
+  }, [user]);
   return (
     <>
       <main className="main">
@@ -18,7 +68,9 @@ const Profile = () => {
               </form>
             </div>
 
-            <h2 className="main__h2">Здравствуйте, Антон!</h2>
+            <h2 className="main__h2">
+              Здравствуйте, {(userData?.name || user?.email) ?? "пользователь"}
+            </h2>
 
             <div className="main__profile profile">
               <div className="profile__content">
@@ -30,7 +82,11 @@ const Profile = () => {
                         <img src="#" alt="" />
                       </use>
                     </div>
-                    <use className="settings__change-photo" href="" target="_self">
+                    <use
+                      className="settings__change-photo"
+                      href=""
+                      target="_self"
+                    >
                       Заменить
                     </use>
                   </div>
@@ -39,11 +95,12 @@ const Profile = () => {
                       <div className="settings__div">
                         <label for="fname">Имя</label>
                         <input
+                          onChange={onChange}
                           className="settings__f-name"
                           id="settings-fname"
-                          name="fname"
+                          name="name"
                           type="text"
-                          value="Ан"
+                          value={userData?.name}
                           placeholder=""
                         />
                       </div>
@@ -51,11 +108,12 @@ const Profile = () => {
                       <div className="settings__div">
                         <label for="lname">Фамилия</label>
                         <input
+                          onChange={onChange}
                           className="settings__l-name"
                           id="settings-lname"
-                          name="lname"
+                          name="surname"
                           type="text"
-                          value="Городецкий"
+                          value={userData?.surname}
                           placeholder=""
                         />
                       </div>
@@ -63,11 +121,12 @@ const Profile = () => {
                       <div className="settings__div">
                         <label for="city">Город</label>
                         <input
+                          onChange={onChange}
                           className="settings__city"
                           id="settings-city"
                           name="city"
                           type="text"
-                          value="Санкт-Петербург"
+                          value={userData?.city}
                           placeholder=""
                         />
                       </div>
@@ -75,16 +134,21 @@ const Profile = () => {
                       <div className="settings__div">
                         <label for="phone">Телефон</label>
                         <input
+                          onChange={onChange}
                           className="settings__phone"
                           id="settings-phone"
                           name="phone"
                           type="tel"
-                          value="89161234567"
+                          value={userData?.phone}
                           placeholder="+79161234567"
                         />
                       </div>
 
-                      <button className="settings__btn btn-hov02" id="settings-btn">
+                      <button
+                        type="button"
+                        className="settings__btn btn-hov02"
+                        id="settings-btn"
+                      >
                         Сохранить
                       </button>
                     </form>
@@ -97,125 +161,25 @@ const Profile = () => {
           </div>
           <div className="main__content">
             <div className="content__cards cards">
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
+              {data?.map((ad) => (
+                <div className="cards__item">
+                  <div className="cards__card card">
+                    <div className="card__image">
+                      <use href="" target="_blank">
+                        <img src="#" alt="picture" />
+                      </use>
+                    </div>
+                    <div className="card__content">
+                      <use href="" target="_blank">
+                        <h3 className="card__title">{ad?.title}</h3>
+                      </use>
+                      <p className="card__price">{ad?.price}</p>
+                      <p className="card__place">{ad?.user.city}</p>
+                      <p className="card__date">{ad?.created_on}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="cards__item">
-                <div className="cards__card card">
-                  <div className="card__image">
-                    <use href="" target="_blank">
-                      <img src="#" alt="picture" />
-                    </use>
-                  </div>
-                  <div className="card__content">
-                    <use href="" target="_blank">
-                      <h3 className="card__title">
-                        Ракетка для большого тенниса Triumph Pro ST
-                      </h3>
-                    </use>
-                    <p className="card__price">2&nbsp;200&nbsp;₽</p>
-                    <p className="card__place">Санкт Петербург</p>
-                    <p className="card__date">Сегодня в&nbsp;10:45</p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

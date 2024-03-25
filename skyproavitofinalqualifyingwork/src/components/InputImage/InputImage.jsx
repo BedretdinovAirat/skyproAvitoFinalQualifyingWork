@@ -16,13 +16,21 @@ const InputImage = ({ preview, onChange, onDelete }) => {
         Фотографии товара<span>не более 5 фотографий</span>
       </p>
       <div onClick={onClick} className={styles.formNewArtBarImg}>
-        <input onChange={handleOnChange} ref={ref} type="file" />
+        <input
+          style={{ display: "none" }}
+          onChange={handleOnChange}
+          ref={ref}
+          type="file"
+        />
         {preview?.map((img) => (
           <>
             <div className={styles.formNewArtImg}>
               {img && (
                 <>
-                  <button onDelete={onDelete} type="button">
+                  <button
+                    onClick={(event) => onDelete(event, img.id)}
+                    type="button"
+                  >
                     X
                   </button>
                   <img src={img.url} alt="" />

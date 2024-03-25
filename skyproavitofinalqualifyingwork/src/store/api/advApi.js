@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setAuth } from "../slices/userSlice";
 const baseAds = "http://localhost:8090/";
-
+const baseURL = "http://localhost:3000";
 // дополнительный код рефреш
 
 export const baseQueryWithReauth = async (args, api, options) => {
@@ -23,13 +23,13 @@ export const baseQueryWithReauth = async (args, api, options) => {
   if (result?.error?.status === 401) {
     const { token } = api.getState().user;
     if (!token) {
-      window.location.href = `${baseAds}/login`;
+      window.location.href = `${baseURL}/signin`;
       return;
     }
     const { access_token, refresh_token } = token;
     console.log(access_token, refresh_token);
     if (!access_token || !refresh_token) {
-      window.location.href = `${baseAds}/login`;
+      window.location.href = `${baseURL}/signin`;
       return;
     }
 
@@ -46,7 +46,7 @@ export const baseQueryWithReauth = async (args, api, options) => {
       options
     );
     if (resultAuth?.error) {
-      window.location.href = `${baseAds}/login`;
+      window.location.href = `${baseURL}/signin`;
       return;
     }
     api.dispatch(
@@ -58,7 +58,7 @@ export const baseQueryWithReauth = async (args, api, options) => {
     localStorage.setItem("token", JSON.stringify(resultAuth.data));
     const retryResult = await baseQuery(args, api, options);
     if (retryResult?.error?.status === 401) {
-      window.location.href = `${baseAds}/login`;
+      window.location.href = `${baseURL}/signin`;
       return;
     }
     return retryResult;
@@ -69,17 +69,7 @@ export const baseQueryWithReauth = async (args, api, options) => {
 // мой код
 export const advApi = createApi({
   reducerPath: "advApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: baseAds,
-    prepareHeaders: (headers, api) => {
-      const { user } = api.getState();
-      if (user.isAuth) {
-        const accessToken = user.token.access_token;
-        headers.append("Authorization", `Bearer ${accessToken}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     getAllAds: builder.query({
       query: () => "ads",
@@ -110,6 +100,37 @@ export const advApi = createApi({
         },
       }),
     }),
+    createAd: builder.mutation({
+      query: ({ title, price, description, images }) => ({
+        url: `/ads?title=${title}&price=${price}&description=${description}`,
+        method: "POST",
+        body: images,
+      }),
+    }),
+    deleteImg: builder.mutation({
+      query: ({ id, url }) => ({
+        url: `/ads/${id}/image?file_url=${url}`,
+        method: "DELETE",
+      }),
+    }),
+    addImage: builder.mutation({
+      query: ({ id, image }) => ({
+        url: `/ads/${id}/image`,
+        method: "POST",
+        body: image,
+      }),
+    }),
+    editAd: builder.mutation({
+      query: ({ title, description, price, id }) => ({
+        url: `/ads/${id}`,
+        method: "PATCH",
+        body: {
+          title,
+          description,
+          price,
+        },
+      }),
+    }),
   }),
 });
 export const {
@@ -120,4 +141,8 @@ export const {
   useGetSellersQuery,
   useGetAdSellerQuery,
   useCreateTextAdMutation,
+  useCreateAdMutation,
+  useDeleteImgMutation,
+  useAddImageMutation,
+  useEditAdMutation,
 } = advApi;

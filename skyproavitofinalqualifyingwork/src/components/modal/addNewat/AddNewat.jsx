@@ -1,16 +1,45 @@
 import React, { useState } from "react";
 import styles from "./addNewat.module.css";
-import { useCreateTextAdMutation } from "../../../store/api/advApi";
+import {
+  useCreateAdMutation,
+  useCreateTextAdMutation,
+} from "../../../store/api/advApi";
 import ModalLayout from "../../modalLayout/ModalLayout";
 import InputImage from "../../InputImage/InputImage";
+import { useNavigate } from "react-router-dom";
 const AddNewat = () => {
+  const navigate = useNavigate();
+  const [preview, setPreview] = useState(Array(5).fill(null));
   const [adData, setAdData] = useState({
     title: "",
     description: "",
     price: "",
     images: [],
   });
+  const [createAd] = useCreateAdMutation();
   const [createTextAd] = useCreateTextAdMutation();
+  const onImageChange = (event) => {
+    if (adData.images.length === 5) {
+      alert("Слишком много фото...");
+      return;
+    }
+    const file = event.target.files?.[0];
+    if (file) {
+      setAdData({
+        ...adData,
+        images: [...adData.images, { id: adData.images.length, file }],
+      });
+      console.log(file);
+      const url = URL.createObjectURL(file);
+      console.log(url);
+      const newPreview = [...preview];
+      newPreview.splice(adData.images.length, 1, {
+        url,
+        id: adData.images.length,
+      });
+      setPreview(newPreview);
+    }
+  };
   const onChange = (event) => {
     const { name, value } = event.target;
     setAdData({ ...adData, [name]: value });
@@ -22,8 +51,40 @@ const AddNewat = () => {
       return;
     }
     if (!adData.images.length) {
-      createTextAd({ title, description, price });
+      createTextAd({ title, description, price })
+        .unwrap()
+        .then(() => {
+          navigate(-1);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      const data = new FormData();
+      for (const img of adData.images) {
+        data.append("files", img.file);
+      }
+      createAd({ title, description, price, images: data })
+        .unwrap()
+        .then(() => {
+          navigate(-1);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
+  };
+  const onDelete = (event, id) => {
+    event.stopPropagation();
+    const newPreview = [...preview];
+    const img = newPreview.find((elem) => elem.id === id);
+
+    const index = newPreview.indexOf(img);
+    newPreview.splice(index, 1);
+    newPreview.push(null);
+    setPreview(newPreview);
+    const newImages = adData.images.filter((elem) => elem.id !== id);
+    setAdData({ ...adData, images: newImages });
   };
   return (
     <ModalLayout>
@@ -57,7 +118,11 @@ const AddNewat = () => {
             placeholder="Введите описание"
           ></textarea>
         </div>
-        <InputImage />
+        <InputImage
+          preview={preview}
+          onDelete={onDelete}
+          onChange={onImageChange}
+        />
         <div className={styles.formNewArtBlock}>
           {/* // form-newArt__block block-price */}
           <label for="price">Цена</label>

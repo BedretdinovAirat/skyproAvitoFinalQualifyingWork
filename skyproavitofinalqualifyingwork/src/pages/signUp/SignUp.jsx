@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./signup.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignUpMutation } from "../../store/api/userApi";
 const SignUp = () => {
-  const [signUp] = useSignUpMutation();
+  const navigate = useNavigate();
+  const [signUp, error] = useSignUpMutation();
+
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -28,7 +30,15 @@ const SignUp = () => {
       alert("dont ok");
       return;
     }
-    signUp({ email, password, name, surname, city, phone });
+    signUp({ email, password, name, surname, city, phone })
+      .unwrap()
+      .then((data) => {
+        console.log(data);
+        navigate("/signin");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
   return (
     <div className="container-signup">
@@ -108,8 +118,9 @@ const SignUp = () => {
             className="modal__btn-signup-ent"
             id="SignUpEnter"
           >
-            <Link to="/">Зарегистрироваться</Link>
+            Зарегистрироваться
           </button>
+          <p>{error?.error}</p>
           <button className="modal__btn-enter" id="btnEnter">
             <Link to="/signin">Войти</Link>
           </button>

@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./article.css";
-import { useParams } from "react-router-dom";
 import { useGetAdQuery } from "../../store/api/advApi";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useLocation, Outlet } from "react-router-dom";
+
 const Article = () => {
+  const { pathname } = useLocation();
+  const { user } = useSelector((store) => store.user);
   const [preview, setPreview] = useState(null);
   const { id } = useParams();
   const { data, error } = useGetAdQuery({ id });
   useEffect(() => {
     if (data) {
-      setPreview(`http://localhost:8090/${data.images[0].url}`);
+      setPreview(`http://localhost:8090/${data.images?.[0].url}`);
     }
   }, [data]);
   return (
@@ -39,11 +43,11 @@ const Article = () => {
                   {data?.images.map((img) => (
                     <div
                       onClick={() =>
-                        setPreview(`http://localhost:8090/${img.url}`)
+                        setPreview(`http://localhost:8090/${img?.url}`)
                       }
                       className="article__img-bar-div"
                     >
-                      <img src={`http://localhost:8090/${img.url}`} alt="" />
+                      <img src={`http://localhost:8090/${img?.url}`} alt="" />
                     </div>
                   ))}
                 </div>
@@ -71,6 +75,9 @@ const Article = () => {
                   Показать&nbsp;телефон
                   <span>{data?.user.phone}</span>
                 </button>
+                {user?.id === data?.user_id && (
+                  <Link to={`${pathname}/edit`}>Редактировать объявление</Link>
+                )}
                 <Link to={`/seller-profile/${data?.user_id}`}>
                   <div className="article__author author">
                     <div className="author__img">
@@ -119,6 +126,7 @@ const Article = () => {
           </div>
         </div>
       </footer>
+      <Outlet />
     </>
   );
 };

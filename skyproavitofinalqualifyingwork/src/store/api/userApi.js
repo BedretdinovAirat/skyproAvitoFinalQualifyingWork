@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setAuth } from "../slices/userSlice";
 const baseAds = "http://localhost:8090/";
+const baseURL = "http://localhost:3000";
 
 // дополнительный код рефреш
 export const baseQueryWithReauth = async (args, api, options) => {
@@ -22,13 +23,13 @@ export const baseQueryWithReauth = async (args, api, options) => {
   if (result?.error?.status === 401) {
     const { token } = api.getState().user;
     if (!token) {
-      window.location.href = `${baseAds}/login`;
+      window.location.href = `${baseURL}/signin`;
       return;
     }
     const { access_token, refresh_token } = token;
     console.log(access_token, refresh_token);
     if (!access_token || !refresh_token) {
-      window.location.href = `${baseAds}/login`;
+      window.location.href = `${baseURL}/signin`;
       return;
     }
 
@@ -45,7 +46,7 @@ export const baseQueryWithReauth = async (args, api, options) => {
       options
     );
     if (resultAuth?.error) {
-      window.location.href = `${baseAds}/login`;
+      window.location.href = `${baseURL}/signin`;
       return;
     }
     api.dispatch(
@@ -57,7 +58,7 @@ export const baseQueryWithReauth = async (args, api, options) => {
     localStorage.setItem("token", JSON.stringify(resultAuth.data));
     const retryResult = await baseQuery(args, api, options);
     if (retryResult?.error?.status === 401) {
-      window.location.href = `${baseAds}/login`;
+      window.location.href = `${baseURL}/signin`;
       return;
     }
     return retryResult;
@@ -68,17 +69,7 @@ export const baseQueryWithReauth = async (args, api, options) => {
 // мой код
 export const userApi = createApi({
   reducerPath: "userApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: baseAds,
-    prepareHeaders: (headers, api) => {
-      const { user } = api.getState();
-      if (user.isAuth) {
-        const accessToken = user.token.access_token;
-        headers.append("Authorization", `Bearer ${accessToken}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
     getUserData: builder.query({
       query: () => "user",
@@ -92,6 +83,17 @@ export const userApi = createApi({
           password,
         },
       }),
+      transformErrorResponse: (error) => {
+        if (error.status === 401) {
+          return error.data.detail;
+        }
+        if (error.status === 422) {
+          if (error.data.detail instanceof Array) {
+            return error.data.detail[0].msg;
+          }
+        }
+        return error;
+      },
     }),
     signUp: builder.mutation({
       query: ({
@@ -115,8 +117,46 @@ export const userApi = createApi({
           role,
         },
       }),
+      transformErrorResponse: (error) => {
+        if (error.status === 400) {
+          return "Такой пользователь уже существует";
+        }
+        if (error.status === 422) {
+          if (error.data.detail instanceof Array) {
+            return error.data.detail[0].msg;
+          }
+        }
+        return error;
+      },
+    }),
+    updateUserInfo: builder.mutation({
+      query: ({ name, surname, email, city, phone, role = "user" }) => ({
+        url: "/user",
+        method: "PATCH",
+        body: {
+          name,
+          surname,
+          email,
+          city,
+          phone,
+          role,
+        },
+      }),
+    }),
+    changeAvatar: builder.mutation({
+      query: ({ file }) => ({
+        url: "/user/avatar",
+        method: "POST",
+        body: file,
+      }),
+      invalidatesTags: ["user"],
     }),
   }),
 });
-export const { useLazyGetUserDataQuery, useSignInMutation, useSignUpMutation } =
-  userApi;
+export const {
+  useLazyGetUserDataQuery,
+  useSignInMutation,
+  useSignUpMutation,
+  useUpdateUserInfoMutation,
+  useChangeAvatarMutation,
+} = userApi;
