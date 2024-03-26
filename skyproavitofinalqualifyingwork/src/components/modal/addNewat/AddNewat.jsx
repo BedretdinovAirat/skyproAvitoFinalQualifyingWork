@@ -130,7 +130,7 @@ const AddNewat = () => {
             onChange={onChange}
             value={adData.price}
             className={styles.formNewArtInputPrice}
-            type="text"
+            type="number"
             name="price"
             id="formName"
           />

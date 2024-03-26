@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "./signup.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignUpMutation } from "../../store/api/userApi";
+import { useSignUpMutation } from "../../store/api/authApi";
 const SignUp = () => {
   const navigate = useNavigate();
   const [signUp, error] = useSignUpMutation();
-
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -19,6 +18,7 @@ const SignUp = () => {
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value });
   };
+
   const onClick = () => {
     const { email, password, repitPassword, name, surname, city, phone } =
       userData;
@@ -30,6 +30,7 @@ const SignUp = () => {
       alert("dont ok");
       return;
     }
+
     signUp({ email, password, name, surname, city, phone })
       .unwrap()
       .then((data) => {

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./article.css";
-import { useGetAdQuery } from "../../store/api/advApi";
+import {
+  useDeleteAdMutation,
+  useGetAdQuery,
+  useGetAdReviewsQuery,
+} from "../../store/api/advApi";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useLocation, Outlet } from "react-router-dom";
@@ -10,12 +14,37 @@ const Article = () => {
   const { user } = useSelector((store) => store.user);
   const [preview, setPreview] = useState(null);
   const { id } = useParams();
-  const { data, error } = useGetAdQuery({ id });
+  const { data } = useGetAdQuery({ id });
+  const { data: comments } = useGetAdReviewsQuery({ id });
+  const [deleteAd] = useDeleteAdMutation();
+  function pluralizeReviews(numReviews) {
+    if (numReviews % 100 >= 11 && numReviews % 100 <= 19) {
+      return "отзывов";
+    }
+
+    switch (numReviews % 10) {
+      case 1:
+        return "отзыв";
+      case 2:
+      case 3:
+      case 4:
+        return "отзыва";
+      default:
+        return "отзывов";
+    }
+  }
+  const onDelete = () => {
+    deleteAd({ id });
+  };
   useEffect(() => {
     if (data) {
-      setPreview(`http://localhost:8090/${data.images?.[0].url}`);
+      let preview = data.images.length
+        ? `http://localhost:8090/${data.images?.[0].url}`
+        : "/img/notImage.png";
+      setPreview(preview);
     }
   }, [data]);
+
   return (
     <>
       <main className="main">
@@ -66,9 +95,11 @@ const Article = () => {
                 <div className="article__info">
                   <p className="article__date">{data?.created_on}</p>
                   <p className="article__city">{data?.user.city}</p>
-                  <use className="article__link" href="" target="_blank" rel="">
-                    23 отзыва
-                  </use>
+                  <Link to={`${pathname}/reviews`}>
+                    <p className="article__link" rel="">
+                      {comments?.length} {pluralizeReviews(comments?.length)}
+                    </p>
+                  </Link>
                 </div>
                 <p className="article__price">{data?.price}</p>
                 <button className="article__btn btn-hov02">
@@ -77,6 +108,12 @@ const Article = () => {
                 </button>
                 {user?.id === data?.user_id && (
                   <Link to={`${pathname}/edit`}>Редактировать объявление</Link>
+                )}
+                {/* 20:59 */}
+                {user?.id === data?.user_id && (
+                  <button onClick={onDelete} type="button">
+                    Снять с публикации
+                  </button>
                 )}
                 <Link to={`/seller-profile/${data?.user_id}`}>
                   <div className="article__author author">

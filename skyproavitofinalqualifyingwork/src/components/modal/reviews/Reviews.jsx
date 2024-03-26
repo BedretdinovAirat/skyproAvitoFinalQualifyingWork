@@ -1,143 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import ModalLayout from "../../modalLayout/ModalLayout";
 import styles from "./reviews.module.css";
+import {
+  useGetAdReviewsQuery,
+  usePostAdReviewsMutation,
+} from "../../../store/api/advApi";
 const Reviews = () => {
+  const { id } = useParams();
+  const { data, refetch } = useGetAdReviewsQuery({ id });
+  const [postAdReviews] = usePostAdReviewsMutation();
+  const [comment, setComment] = useState("");
+  const onClick = () => {
+    if (!comment || !comment.trim()) {
+      alert("Незаполненные поля");
+      return;
+    }
+    postAdReviews({ text: comment, id })
+      .unwrap()
+      .then(() => {
+        alert("Отправлен");
+        refetch();
+        setComment("");
+      });
+  };
+
   return (
-    <div className={styles.containerBg}>
-      <div className={styles.modalBlock}>
-        <div className={styles.modalContent}>
-          <h3 className={styles.modalTitle}>Отзывы о товаре</h3>
-          <div className={styles.modalBtnClose}>
-            <div className={styles.modalBtnCloseLine}></div>
+    <ModalLayout>
+      <div className={styles.modalScroll}>
+        <form className={styles.modalFormNewArt} id="formNewArt" action="#">
+          <div className={styles.formNewArtBlock}>
+            <label for="text">Добавить отзыв</label>
+            <textarea
+              onChange={(event) => setComment(event.target.value)}
+              value={comment}
+              className={styles.formNewArtArea}
+              name="text"
+              id="formArea"
+              cols="auto"
+              rows="5"
+              placeholder="Введите описание"
+            ></textarea>
           </div>
-          <div className={styles.modalScroll}>
-            <form className={styles.modalFormNewArt} id="formNewArt" action="#">
-              <div className={styles.formNewArtBlock}>
-                <label for="text">Добавить отзыв</label>
-                <textarea
-                  className={styles.formNewArtArea}
-                  name="text"
-                  id="formArea"
-                  cols="auto"
-                  rows="5"
-                  placeholder="Введите описание"
-                ></textarea>
-              </div>
-              <button className={styles.formNewArtBtnPub} id="btnPublish">
-                Опубликовать
-              </button>
-            </form>
+          <button
+            onClick={onClick}
+            type="button"
+            className={styles.formNewArtBtnPub}
+            id="btnPublish"
+          >
+            Опубликовать
+          </button>
+        </form>
 
-            <div className={styles.modalReviews}>
-              <div className={styles.reviewsReview}>
-                <div className={styles.reviewItem}>
-                  <div className={styles.reviewLeft}>
-                    <div className={styles.reviewImg}>
-                      <img src="" alt="" />
-                    </div>
-                  </div>
-                  <div className={styles.reviewRight}>
-                    <p className={styles.reviewName}>
-                      {/* font-t */}
-                      Олег <span>14 августа</span>
-                    </p>
-                    <h5 className={styles.reviewTitle}>Комментарий</h5>
-                    <p className="review__text font-t">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
+        <div className={styles.modalReviews}>
+          {data?.map((comment) => (
+            <div className={styles.reviewsReview}>
+              <div className={styles.reviewItem}>
+                <div className={styles.reviewLeft}>
+                  <div className={styles.reviewImg}>
+                    <img src="" alt="" />
                   </div>
                 </div>
-              </div>
-
-              <div className={styles.reviewsReview}>
-                <div className={styles.reviewItem}>
-                  <div className={styles.reviewLeft}>
-                    <div className={styles.reviewImg}>
-                      <img src="" alt="" />
-                    </div>
-                  </div>
-                  <div className={styles.reviewRight}>
-                    <p className={styles.reviewName}>
-                      Олег <span>14 августа</span>
-                    </p>
-                    <h5 className={styles.reviewTitle}>Комментарий</h5>
-                    <p className="review__text font-t">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.reviewsReview}>
-                <div className={styles.reviewItem}>
-                  <div className={styles.reviewLeft}>
-                    <div className={styles.reviewImg}>
-                      <img src="" alt="" />
-                    </div>
-                  </div>
-                  <div className={styles.reviewRight}>
-                    <p className={styles.reviewName}>
-                      Олег <span>14 августа</span>
-                    </p>
-                    <h5 className={styles.reviewTitle}>Комментарий</h5>
-                    <p className="review__text font-t">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.reviewsReview}>
-                <div className={styles.reviewItem}>
-                  <div className={styles.reviewLeft}>
-                    <div className={styles.reviewImg}>
-                      <img src="" alt="" />
-                    </div>
-                  </div>
-                  <div className={styles.reviewRight}>
-                    <p className={styles.reviewName}>
-                      Олег <span>14 августа</span>
-                    </p>
-                    <h5 className={styles.reviewTitle}>Комментарий</h5>
-                    <p className="review__text font-t">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.reviewsReview}>
-                <div className={styles.reviewItem}>
-                  <div className={styles.reviewLeft}>
-                    <div className={styles.reviewImg}>
-                      <img src="" alt="" />
-                    </div>
-                  </div>
-                  <div className={styles.reviewRight}>
-                    <p className={styles.reviewName}>
-                      Олег <span>14 августа</span>
-                    </p>
-                    <h5 className={styles.reviewTitle}>Комментарий</h5>
-                    <p className="review__text font-t">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                  </div>
+                <div className={styles.reviewRight}>
+                  <p className={styles.reviewName}>
+                    {/* font-t */}
+                    {comment?.author.name} <span>{comment?.created_on}</span>
+                  </p>
+                  <h5 className={styles.reviewTitle}>Комментарий</h5>
+                  <p className="review__text font-t">{comment?.text}</p>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
-    </div>
+    </ModalLayout>
   );
 };
 

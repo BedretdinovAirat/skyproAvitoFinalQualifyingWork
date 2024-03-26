@@ -1,8 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
+// 26.03.2024
+const checkLSParse = (key) => {
+  try {
+    const data = JSON.parese(localStorage.getItem(key));
+    return data;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};
+
 const initialState = {
-  isAuth: !!localStorage.getItem("user") ?? false,
-  token: JSON.parse(localStorage.getItem("token")) ?? false,
-  user: JSON.parse(localStorage.getItem("user")) ?? false,
+  isAuth: !!checkLSParse("token"),
+  token: checkLSParse("token"),
+  user: checkLSParse("token"),
 };
 const userSlice = createSlice({
   name: "user",

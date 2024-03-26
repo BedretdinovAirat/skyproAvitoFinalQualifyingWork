@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./signin.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignInMutation } from "../../store/api/userApi";
 import { useAuth } from "../../context/useAuth";
+import { useSignInMutation } from "../../store/api/authApi";
 const SignIn = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -32,6 +32,9 @@ const SignIn = () => {
         console.error(err);
       });
   };
+  useEffect(() => {
+    console.log(error?.error);
+  }, [error]);
   return (
     <div className="container-enter">
       <div className="modal__block">
@@ -67,7 +70,7 @@ const SignIn = () => {
           >
             Войти
           </button>
-          <p>{error?.error}</p>
+          <p>{(error?.error && error?.error) ?? "что-то пошло не так"}</p>
           <button className="modal__btn-signup" id="btnSignUp">
             <Link to="/signup">Зарегистрироваться</Link>
           </button>

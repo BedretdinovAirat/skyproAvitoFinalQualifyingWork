@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./profile.css";
 import { Link } from "react-router-dom";
 import { useGetMyAdQuery } from "../../store/api/advApi";
@@ -9,6 +9,7 @@ import {
 } from "../../store/api/userApi";
 
 const Profile = () => {
+  const ref = useRef(null);
   const [updateUser] = useUpdateUserInfoMutation();
   const [changeAvatar] = useChangeAvatarMutation();
   const [avatar, setAvatar] = useState("");
@@ -27,8 +28,8 @@ const Profile = () => {
     setUserData({ ...userData, [name]: value });
   };
   const onClick = () => {
-    const { name, surname, email, city, phone } = userData;
-    updateUser({ name, surname, email, city, phone })
+    const { name, surname, city, phone } = userData;
+    updateUser({ name, surname, city, phone })
       .unwrap()
       .then(() => alert("Данные обновились"));
   };
@@ -48,10 +49,23 @@ const Profile = () => {
         email: user.email,
         city: user.city,
         phone: user.phone,
-        avatar: `http://localhost:8090/${user.avatar}`,
+        avatar: user.avatar
+          ? `http://localhost:8090/${user.avatar}`
+          : "/img/notImage.png",
       });
     }
   }, [user]);
+
+  useEffect(() => {
+    if (avatar) {
+      const url = URL.createObjectURL(avatar);
+      setUserData({ ...userData, avatar: url });
+    }
+  }, [avatar]);
+  const onChangeAvatar = (event) => {
+    const file = event.target.files[0];
+    setAvatar(file);
+  };
   return (
     <>
       <main className="main">
@@ -78,17 +92,27 @@ const Profile = () => {
                 <div className="profile__settings settings">
                   <div className="settings__left">
                     <div className="settings__img">
-                      <use href="" target="_self">
-                        <img src="#" alt="" />
-                      </use>
+                      <input
+                        style={{ display: "none" }}
+                        type="file"
+                        ref={ref}
+                        onChange={onChangeAvatar}
+                      />
+                      <img
+                        src={userData.avatar ?? "/img/notImage.png"}
+                        onClick={() => ref.current?.click()}
+                        alt=""
+                      />
                     </div>
-                    <use
+                    <button
+                      onClick={handleAvatar}
                       className="settings__change-photo"
                       href=""
+                      type="button"
                       target="_self"
                     >
                       Заменить
-                    </use>
+                    </button>
                   </div>
                   <div className="settings__right">
                     <form className="settings__form" action="#">
@@ -145,6 +169,7 @@ const Profile = () => {
                       </div>
 
                       <button
+                        onClick={onClick}
                         type="button"
                         className="settings__btn btn-hov02"
                         id="settings-btn"
