@@ -5,6 +5,13 @@ import { useGetAllAdsQuery } from "../../store/api/advApi";
 import MainSearch from "../../components/mainSearch/MainSearch";
 const Main = () => {
   const { data } = useGetAllAdsQuery();
+  let moment = require("moment");
+  require("moment/locale/ru");
+
+  const formattedDuration = moment
+    .utc(data?.created_on)
+    .format("dddd,DD.MM.YYYY, h:mm:ss")
+    .split(",");
   return (
     <>
       <main className={styles.main}>
@@ -37,7 +44,10 @@ const Main = () => {
                         </use>
                         <p className="card__price">{adv.price}</p>
                         <p className="card__place">{adv.user.city}</p>
-                        <p className="card__date">{adv.created_on}</p>
+                        <p className="card__date">{formattedDuration[0]}</p>
+                        <p className="card__date">
+                          {formattedDuration[1 + formattedDuration[2]]}
+                        </p>
                       </div>
                     </div>
                   </div>

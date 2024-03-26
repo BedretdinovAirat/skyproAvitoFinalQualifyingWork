@@ -14,6 +14,7 @@ import AuthProvider from "./context/AuthProvider";
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
 import AtclSettings from "./components/modal/atclSettings/AtclSettings";
 import Reviews from "./components/modal/reviews/Reviews";
+import NotFound from "./pages/notFound/NotFound";
 const AppRoutes = () => {
   const location = useLocation();
   const background = location && location.state?.background;
@@ -37,12 +38,14 @@ const AppRoutes = () => {
           </Route>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         {background && (
           <Routes>
             <Route element={<ProtectedRoute />}>
               <Route path="add" element={<AddNewat />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         )}
       </Layout>

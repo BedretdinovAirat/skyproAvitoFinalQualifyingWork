@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "./notFound.module.css";
-const notFound = () => {
+const NotFound = () => {
   return (
     <div className={style.notFound}>
       <div className={style.notFoundContent}>
@@ -16,8 +16,8 @@ const notFound = () => {
           Возможно, страница была удалена или перенесена на другой адреc
         </p>
         <Link to="/">
-          <button className="notFound__button">
-            <use className="notFound__link">Вернуться на главную</use>;
+          <button className={style.notFoundButton}>
+            <use className={style.notFoundLink}>Вернуться на главную</use>;
           </button>
         </Link>
       </div>
@@ -25,4 +25,4 @@ const notFound = () => {
   );
 };
 
-export default notFound;
+export default NotFound;

@@ -17,8 +17,8 @@ const Header = () => {
             <Link
               state={{ background: location }}
               to="/add"
-              className={classnames(styles.headerBtnPutAd, styles.btnHov01)}
-              id="btputAd"
+              className={classnames(styles.headerBtnMainEnter, styles.btnHov01)}
+              // id="btputAd"
             >
               {/* header__btn-putAd btn-hov01" */}
               Разместить объявление
@@ -26,7 +26,12 @@ const Header = () => {
             <Link to="/profile" class={styles.headerBtnMainEnter}>
               Личный кабинет
             </Link>
-            <button onClick={logout} type="button">
+            <button
+              className={classnames(styles.headerBtnMainEnter, styles.btnHov01)}
+              onClick={logout}
+              type="button"
+              // id="btputAd"
+            >
               Выйти
             </button>
           </>

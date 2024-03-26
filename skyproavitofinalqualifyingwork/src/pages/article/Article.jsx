@@ -17,6 +17,13 @@ const Article = () => {
   const { data } = useGetAdQuery({ id });
   const { data: comments } = useGetAdReviewsQuery({ id });
   const [deleteAd] = useDeleteAdMutation();
+  let moment = require("moment");
+  require("moment/locale/ru");
+
+  const formattedDuration = moment
+    .utc(data?.user.sells_from)
+    .format("DD.MM.YYYY");
+
   function pluralizeReviews(numReviews) {
     if (numReviews % 100 >= 11 && numReviews % 100 <= 19) {
       return "отзывов";
@@ -51,7 +58,7 @@ const Article = () => {
         <div className="main__container">
           <div className="main__menu menu">
             <use className="menu__logo-link" href="" target="_blank">
-              <img className="menu__logo-img" src="img/logo.png" alt="logo" />
+              <img className="menu__logo-img" src="/img/logo.png" alt="logo" />
             </use>
             <form className="menu__form" action="#">
               <Link to="/" className="menu__btn-serch btn-hov02">
@@ -102,19 +109,36 @@ const Article = () => {
                   </Link>
                 </div>
                 <p className="article__price">{data?.price}</p>
-                <button className="article__btn btn-hov02">
-                  Показать&nbsp;телефон
-                  <span>{data?.user.phone}</span>
-                </button>
-                {user?.id === data?.user_id && (
-                  <Link to={`${pathname}/edit`}>Редактировать объявление</Link>
-                )}
-                {/* 20:59 */}
-                {user?.id === data?.user_id && (
-                  <button onClick={onDelete} type="button">
-                    Снять с публикации
+                <div
+                  style={{
+                    dislpay: "flex",
+                    gap: "10px",
+                    flexDirection: "column",
+                  }}
+                >
+                  <button className="article__btn btn-hov02">
+                    Показать&nbsp;телефон
+                    <span>{data?.user.phone}</span>
                   </button>
-                )}
+                  {user?.id === data?.user_id && (
+                    <Link
+                      className="article__btn btn-hov02"
+                      to={`${pathname}/edit`}
+                    >
+                      Редактировать объявление
+                    </Link>
+                  )}
+                  {/* 20:59 */}
+                  {user?.id === data?.user_id && (
+                    <button
+                      className="article__btn btn-hov02"
+                      onClick={onDelete}
+                      type="button"
+                    >
+                      Снять с публикации
+                    </button>
+                  )}
+                </div>
                 <Link to={`/seller-profile/${data?.user_id}`}>
                   <div className="article__author author">
                     <div className="author__img">
@@ -126,7 +150,7 @@ const Article = () => {
                     <div className="author__cont">
                       <p className="author__name">{data?.user.name}</p>
                       <p className="author__about">
-                        Продает товары с {data?.user.sells_from}
+                        Продает товары с {formattedDuration}
                       </p>
                     </div>
                   </div>

@@ -1,15 +1,15 @@
 .btn-hov01:hover {
   background: rgba(255, 255, 255, 0.15);
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
 }
 
 .btn-hov02:hover {
-  background-color: #0080C1;
+  background-color: #0080c1;
 }
 
 .main__h2:hover::before {
-  border-top: 2px solid #0080C1;
-  border-left: 2px solid #0080C1;
+  border-top: 2px solid #0080c1;
+  border-left: 2px solid #0080c1;
 }
 
 .main__container {
@@ -28,11 +28,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
+  -ms-flex-pack: start;
+  justify-content: start;
   padding: 11px 0;
   width: 100%;
   padding: 31px 10px 64px;
@@ -82,14 +82,19 @@
 }
 
 .menu__btn {
-  width: 241px;
-  height: 50px;
-  background-color: #009EE4;
-  border: 1px solid #009EE4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #009ee4;
   border-radius: 6px;
+  border: 1px solid #009ee4;
+  width: 214px;
+  height: 62px;
   font-size: 16px;
-  line-height: 1;
-  color: #FFFFFF;
+  font-weight: 500;
+  line-height: 22px;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
 }
 
 .profile-sell__content {
@@ -105,11 +110,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: top;
-      -ms-flex-align: top;
-          align-items: top;
+  -ms-flex-align: top;
+  align-items: top;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
+  -ms-flex-pack: start;
+  justify-content: start;
 }
 
 .seller__left {
@@ -118,11 +123,11 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   margin-right: 50px;
 }
 
@@ -134,7 +139,7 @@
   width: 170px;
   height: 170px;
   border-radius: 50%;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .seller__img img {
@@ -142,7 +147,7 @@
   height: auto;
   display: block;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .seller__right {
@@ -157,25 +162,26 @@
   margin-bottom: 0px;
 }
 
-.seller__inf, .seller__city {
+.seller__inf,
+.seller__city {
   font-size: 16px;
   line-height: 21px;
-  color: #5F5F5F;
+  color: #5f5f5f;
   margin-bottom: 10px;
 }
 
 .seller__btn {
   margin-top: 20px;
-  background-color: #009EE4;
+  background-color: #009ee4;
   border-radius: 6px;
-  border: 1px solid #009EE4;
+  border: 1px solid #009ee4;
   width: 214px;
   height: 62px;
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
-  color: #FFFFFF;
-  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
 }
 
 .seller__btn span {
@@ -189,15 +195,15 @@
   width: 100%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (270px)[4];
-      grid-template-columns: repeat(4, 270px);
+  -ms-grid-columns: (270px) [4];
+  grid-template-columns: repeat(4, 270px);
   grid-auto-rows: 441px;
   grid-gap: 40px 26px;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   overflow-y: auto;
-  scrollbar-color: #FFFFFF #2E2E2E;
+  scrollbar-color: #ffffff #2e2e2e;
   scrollbar-width: thin;
   scrollbar-width: 0px;
   height: 441px;
@@ -205,11 +211,11 @@
 
 .cards::-webkit-scrollbar {
   width: 0px;
-  background-color: #009EE4;
+  background-color: #009ee4;
 }
 
 .cards::-webkit-scrollbar-thumb {
-  background-color: #0080C1;
+  background-color: #0080c1;
   border-radius: 3px;
 }
 
@@ -225,14 +231,14 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 .card__image {
   width: 270px;
   height: 270px;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 
 .card__image img {
@@ -240,7 +246,7 @@
   height: 100%;
   display: block;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .card__title {
@@ -248,7 +254,7 @@
   font-size: 22px;
   font-weight: 500;
   line-height: 26px;
-  color: #009EE4;
+  color: #009ee4;
   margin-bottom: 10px;
   margin-top: 20px;
   overflow: hidden;
@@ -263,10 +269,11 @@
   margin-bottom: 10px;
 }
 
-.card__place, .card__date {
+.card__place,
+.card__date {
   font-size: 16px;
   line-height: 21px;
-  color: #5F5F5F;
+  color: #5f5f5f;
 }
 
 .card__place {
