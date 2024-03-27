@@ -87,30 +87,32 @@ const SellerProfile = () => {
           <div className="main__content">
             <div className="content__cards cards">
               {sellerAd?.map((ad) => (
-                <div className="cards__item">
-                  <div className="cards__card card">
-                    <div className="card__image">
-                      <use href="" target="_blank">
-                        <img
-                          src={
-                            ad?.images?.[0]
-                              ? `http://localhost:8090/${ad.images[0].url}`
-                              : "/img/notImage.png"
-                          }
-                          alt=""
-                        />
-                      </use>
-                    </div>
-                    <div className="card__content">
-                      <use href="" target="_blank">
-                        <h3 className="card__title">{ad.title}</h3>
-                      </use>
-                      <p className="card__price">{ad?.price}</p>
-                      <p className="card__place">{ad?.user.city}</p>
-                      <p className="card__date">{ad?.created_on}</p>
+                <Link to={`/article/${ad.id}`}>
+                  <div className="cards__item">
+                    <div className="cards__card card">
+                      <div className="card__image">
+                        <use href="" target="_blank">
+                          <img
+                            src={
+                              ad?.images?.[0]
+                                ? `http://localhost:8090/${ad.images[0].url}`
+                                : "/img/notImage.png"
+                            }
+                            alt=""
+                          />
+                        </use>
+                      </div>
+                      <div className="card__content">
+                        <use href="" target="_blank">
+                          <h3 className="card__title">{ad.title}</h3>
+                        </use>
+                        <p className="card__price">{ad?.price}</p>
+                        <p className="card__place">{ad?.user.city}</p>
+                        <p className="card__date">{ad?.created_on}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
