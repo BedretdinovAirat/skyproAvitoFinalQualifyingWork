@@ -191,7 +191,10 @@ const Profile = () => {
                   <div className="cards__card card">
                     <div className="card__image">
                       <use href="" target="_blank">
-                        <img src="#" alt="picture" />
+                        <img
+                          src={`http://localhost:8090/${ad?.images[0].url}`}
+                          alt=""
+                        />
                       </use>
                     </div>
                     <div className="card__content">

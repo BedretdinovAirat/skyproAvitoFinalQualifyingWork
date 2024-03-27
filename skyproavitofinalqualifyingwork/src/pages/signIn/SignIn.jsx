@@ -70,7 +70,7 @@ const SignIn = () => {
           >
             Войти
           </button>
-          <p>{(error?.error && error?.error) ?? "что-то пошло не так"}</p>
+          <p>{error?.error}</p>
           <button className="modal__btn-signup" id="btnSignUp">
             <Link to="/signup">Зарегистрироваться</Link>
           </button>

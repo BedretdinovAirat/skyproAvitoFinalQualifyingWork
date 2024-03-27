@@ -20,7 +20,11 @@ const SellerProfile = () => {
           <div className="main__center-block">
             <div className="main__menu menu">
               <use className="menu__logo-link" href="" target="_blank">
-                <img className="menu__logo-img" src="img/logo.png" alt="logo" />
+                <img
+                  className="menu__logo-img"
+                  src="/img/logo.png"
+                  alt="logo"
+                />
               </use>
               <form className="menu__form" action="#">
                 <Link to="/" className="menu__btn btn-hov02" id="btnGoBack">

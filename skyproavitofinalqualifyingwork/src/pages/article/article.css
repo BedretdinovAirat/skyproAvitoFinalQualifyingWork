@@ -300,8 +300,8 @@
   line-height: 22px;
   color: #ffffff;
   font-family: "Roboto", sans-serif;
+  margin: 5px;
 }
-
 .article__btn span {
   display: block;
   font-size: 14px;

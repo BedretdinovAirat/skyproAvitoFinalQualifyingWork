@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // 26.03.2024
 const checkLSParse = (key) => {
   try {
-    const data = JSON.parese(localStorage.getItem(key));
+    const data = JSON.parse(localStorage.getItem(key));
     return data;
   } catch (err) {
     console.log(err);
@@ -13,7 +13,7 @@ const checkLSParse = (key) => {
 const initialState = {
   isAuth: !!checkLSParse("token"),
   token: checkLSParse("token"),
-  user: checkLSParse("token"),
+  user: checkLSParse("user"),
 };
 const userSlice = createSlice({
   name: "user",

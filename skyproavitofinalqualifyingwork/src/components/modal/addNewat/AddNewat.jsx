@@ -123,9 +123,9 @@ const AddNewat = () => {
           onDelete={onDelete}
           onChange={onImageChange}
         />
-        <div className={styles.formNewArtBlock}>
+        <div classNames={(styles.formNewArtBlock, styles.blockPrice)}>
           {/* // form-newArt__block block-price */}
-          <label for="price">Цена</label>
+          <label htmlFor="price">Цена</label>
           <input
             onChange={onChange}
             value={adData.price}

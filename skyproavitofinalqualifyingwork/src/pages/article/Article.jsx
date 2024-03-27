@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useLocation, Outlet } from "react-router-dom";
 
 const Article = () => {
+  const [isPhoneVisible, setIsPhoneVisible] = useState(false);
   const { pathname } = useLocation();
   const { user } = useSelector((store) => store.user);
   const [preview, setPreview] = useState(null);
@@ -73,11 +74,16 @@ const Article = () => {
             <div className="article__left">
               <div className="article__fill-img">
                 <div className="article__img">
-                  <img src={preview ?? "/img/notImage.png"} alt="" />
+                  <img
+                    // key={data?.images}
+                    src={preview ?? "/img/notImage.png"}
+                    alt=""
+                  />
                 </div>
                 <div className="article__img-bar">
                   {data?.images.map((img) => (
                     <div
+                      key={data?.images}
                       onClick={() =>
                         setPreview(`http://localhost:8090/${img?.url}`)
                       }
@@ -109,16 +115,15 @@ const Article = () => {
                   </Link>
                 </div>
                 <p className="article__price">{data?.price}</p>
-                <div
-                  style={{
-                    dislpay: "flex",
-                    gap: "10px",
-                    flexDirection: "column",
-                  }}
-                >
-                  <button className="article__btn btn-hov02">
+                <>
+                  <button
+                    onClick={() => setIsPhoneVisible(!isPhoneVisible)}
+                    className="article__btn btn-hov02"
+                  >
                     Показать&nbsp;телефон
-                    <span>{data?.user.phone}</span>
+                    {isPhoneVisible
+                      ? data?.user.phone
+                      : `${data?.user.phone.slice(0, 3)} XXX XX XX`}
                   </button>
                   {user?.id === data?.user_id && (
                     <Link
@@ -138,7 +143,7 @@ const Article = () => {
                       Снять с публикации
                     </button>
                   )}
-                </div>
+                </>
                 <Link to={`/seller-profile/${data?.user_id}`}>
                   <div className="article__author author">
                     <div className="author__img">
